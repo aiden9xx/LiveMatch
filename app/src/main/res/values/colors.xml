@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#24252a</color>
+    <color name="color_primary_dark">#1c1d21</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="black80">#CC000000</color>
+    <color name="black60">#99000000</color>
+    <color name="black40">#66000000</color>
+    <color name="greenColor">#44A348</color>
+    <color name="grey">#8f9092</color>
+    <color name="fail">#D33020</color>
+    <color name="border_color">#80808080</color>
+
+</resources>

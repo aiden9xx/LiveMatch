@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_something_was_wrong">Error something was wrong</string>
+    <string name="error_time_out">Time out</string>
+</resources>

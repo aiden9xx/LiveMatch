@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Live Soccer</string>
+    <string name="live_matches">Live Matches</string>
+    <string name="no_internet">No Internet. Pull to load cache</string>
+    <string name="internet_connected">Connected</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="matches">Matches</string>
+    <string name="view_all">View All</string>
+</resources>
