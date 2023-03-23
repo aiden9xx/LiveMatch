@@ -25,7 +25,8 @@ An Android app showing the Articles from NewsApi.org
 - **Flow**
 - **Retrofit**
 - **Moshi** 
-- **Mockwebserver** (For testing apis)
+- **coil**
+- **Mockwebserver**
  
 ## Screenshots
 
