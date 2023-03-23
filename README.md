@@ -1,5 +1,6 @@
 # About the App
-An Android app showing the Articles from NewsApi.org
+
+An Android App for a hypothetical sports event.
 
 ## Features
 - Show all participating teams.
@@ -13,20 +14,21 @@ An Android app showing the Articles from NewsApi.org
 - Watch previous match highlights.
 
 ## Tech
-- **Kotlin**
-- **Clean Architecture** 
-- **Android Architecture Components**
-  - **LiveData** 
-  - **Room** 
-  - **ViewModel** 
-  - **ViewBinding**
-- **Hilt**
-- **Coroutines** 
-- **Flow**
-- **Retrofit**
-- **Moshi** 
-- **coil**
-- **Mockwebserver**
+- Kotlin
+- Clean Architecture
+- Android Architecture Components
+  - LiveData
+  - Room
+  - ViewModel
+  - ViewBinding
+  - Navigation
+- Hilt
+- Coroutines
+- Flow
+- Retrofit
+- Moshi
+- coil
+- Mockwebserver
  
 ## Screenshots
 
