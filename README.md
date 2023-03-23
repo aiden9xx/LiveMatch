@@ -1,39 +1,24 @@
-# Kotlin + MVVM + Clean Architecture + Coroutines + Hilt
+# home assignment
+## Kotlin + MVVM + Clean Architecture + Coroutines + Hilt...
 
 This project was made with the objective of creating a base structure for new apps, using tools and components supported by Google and by most of the Android development community.
 
-
 ## Clean Architecture
 
-Clean architecture promotes separation of concerns, making the code loosely coupled. This results in a more testable and flexible code. This approach divides the project in 3 modules: presentation, data and domain.
+Layers
 
-* __Presentation__: Layer with the Android Framework, the MVVM pattern and the DI module. Depends on domain to access the use cases and on di, to inject dependencies.
-* __Domain__: Layer with the business logic. Contains the use cases, in charge of calling the correct repository or data member.
-* __Data__: Layer with the responsibility of selecting the proper data source for the domain layer. It contains the implementations of  the repositories declared in the domain layer. It may, for example, check if the data in a database is up to date, and retrieve it from a service if it’s not.
+Clean Architecture basically consists of 5 layers.
 
-As there isn’t a single way to implement Clean Architecture, this could affront changes in the future.
+### Presentation: Layers that interact with the user. This layer includes Activity, Fragment, ViewModel classes etc.
 
-### Domain
+### Use Cases: The layer where the user’s work is defined. You can find a detailed explanation of this title in the following sections of the article.
 
-Business logic can be defined as the core operations done by the application. The domain tries to encapsulate this business logic, to make it agnostic of its context. The components of the domain are:
+### Domain: The layer where logic operations are performed. For example, entities, value object, exceptions, and logic operations are in this layer.
 
-* __Entities__: Simple classes that represent the objects in which the business is based.
-* __Repositories__: Interfaces used by the use cases. Implemented in the data layer.
-* __Use cases__: Also called interactors. They enclose a single action, like getting data from a database or posting to a service. They use the repositories to resolve the action they are supposed to do. They usually override the operator “invoke”, so they can be called as a function.
+### Data: It is the layer where the source of all abstract data is. All data and models that the application can use are located in this layer.
 
-### Data
+### Framework: The layer that interacts with the SDK or framework. So that is, it implements the interaction with the Android SDK and provides custom implementations for the data layer.
 
-The data layer is the implementation of all the repositories declared by the domain layer. This acts as a support of the business layer, from where it obtains the data needed to be shown in the UI.
-
-Data is also an Android module so, besides databases and network requests, it can provide locations, bluetooth access, gyroscope data, among other information respective to the device. This could be separated in another module to provide independency from the framework.
-
-It’s the repository job to know what should be the source of the data. The repository should decide whether the data in the local database is good enough or if it should pull it from a service. The repository shouldn’t be tied to an implementation of database/services. It should have references to interfaces that access the actual framework. A boolean may be passed as a parameter to the repository to force an update from a specific source.
-
-### Presentation
-
-Presentation layer contains every component involved in showing information to the user. The main part of this layer are the Views and ViewModels that will be explained in the next section. In general, the presentation layer is the one using all the Use Cases/Interactors that we created in the domain layer.
-
-Views in this layer are the fragments and activities designed to show information to the user. In MVVM, these views are separated from the logic, which is encapsulated in the ViewModel.
 
 ## MVVM
 
@@ -68,7 +53,7 @@ The view uses LiveData to observe changes in the ViewModel. This has  several ad
 
 Dependency injection is closely related to two SOLID concepts: dependency inversion, which states that high level modules should not depend on low level modules, both should depend on abstractions; and single responsibility principle, which states that every class or module is responsible for just a single piece of functionality.
 DI supports these goals by decoupling the creation and the usage of an object. It allows you to replace dependencies without changing the class that uses them and also reduces the risk of modifying a class because one of its dependencies changed.
-This sample app uses Koin as the dependency injection library.
+This sample app uses Hilt as the dependency injection library.
 
 ## Coroutines
 
