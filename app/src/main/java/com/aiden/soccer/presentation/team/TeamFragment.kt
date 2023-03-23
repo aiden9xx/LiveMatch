@@ -1,20 +1,21 @@
 package com.aiden.soccer.presentation.team
 
 import android.content.Intent
+import android.os.Bundle
 import android.provider.CalendarContract
+import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentTeamBinding
+import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.MatchActivity
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.team.adapter.TeamAdapter
-import com.aiden.soccer.utils.NetworkUtils
-import com.aiden.soccer.utils.animationHide
-import com.aiden.soccer.utils.show
+import com.aiden.soccer.utils.navigateToCalendar
 import com.aiden.soccer.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
@@ -32,34 +33,27 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  */
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class TeamFragment : Fragment(R.layout.fragment_team) {
+class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreViewModel::class) {
 
-    private val binding by viewBinding { FragmentTeamBinding.bind(it) }
-    private val viewModel by viewModels<ScoreViewModel>()
-    private val adapter = TeamAdapter(this::onItemClicked)
+    private val teamAdapter = TeamAdapter(this::onItemClicked)
     private val allMatchesAdapter = AllMatchesAdapter(this::onMatchItemClicked)
 
-    override fun onStart() {
-        super.onStart()
-        initView()
-        observeTeams()
-        observeNetwork()
+    override val layoutId: Int
+        get() = R.layout.fragment_team
+
+    override fun inflateViewBinding(inflater: LayoutInflater): FragmentTeamBinding {
+        return FragmentTeamBinding.inflate(inflater)
     }
 
-    /**
-     * Observe data
-     * ( we also can create a BaseFragment and the put abstract
-     * class observeTeams in BaseFragment )
-     */
-    private fun observeTeams() {
-        viewModel.teamsLiveData.observe(viewLifecycleOwner) { state ->
+    override fun onSubscribeObserver() {
+        viewModelSelf.teamsLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is Resource.Loading<*> -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
                     if (state.data!!.isNotEmpty()) {
-                        adapter.submitList(state.data!!.filter { it.logo != null })
+                        teamAdapter.submitList(state.data!!.filter { it.logo != null })
                         showLoading(false)
                     }
                 }
@@ -70,33 +64,37 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
             }
         }
 
-        viewModel.matchesLiveData.observe(viewLifecycleOwner) { match ->
+        viewModelSelf.matchesLiveData.observe(viewLifecycleOwner) { match ->
             allMatchesAdapter.submitList(match.matches?.upcoming?.take(5))
+        }
+
+        fetchData()
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+        with(binding) {
+            rvTeams.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = teamAdapter
+            }
+
+            rvAllMatches.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = allMatchesAdapter
+            }
+
+            tvViewAll.setOnClickListener {
+                findNavController().navigate(R.id.action_teamFragment_to_allMatchesFragment)
+            }
         }
     }
 
-    private fun getTeams() = viewModel.getTeams()
-
-    /**
-     * Initialize recyclerview
-     */
-    private fun initView() {
-        binding.run {
-            val linearLayoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            rvRecyclerview.layoutManager = linearLayoutManager
-            rvRecyclerview.adapter = adapter
-
-            val linearLayoutManager2 = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.VERTICAL,
-                false
-            )
-            rvAllMatches.layoutManager = linearLayoutManager2
-            rvAllMatches.adapter = allMatchesAdapter
+    private fun fetchData() {
+        with(viewModelSelf) {
+            getTeams()
+            getMatches()
         }
     }
 
@@ -104,9 +102,6 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
 
     }
 
-    /**
-     * Navigate to the detail fragment.
-     */
     private fun onItemClicked(team: Team) {
         val intent = Intent(context, MatchActivity::class.java)
         intent.putExtra(MatchActivity.KEY_TEAM_ID, team.id)
@@ -115,50 +110,9 @@ class TeamFragment : Fragment(R.layout.fragment_team) {
 
     private fun onMatchItemClicked(matchData: MatchData) {
         if (matchData is Upcoming) {
-            val intent = Intent(Intent.ACTION_INSERT)
-            intent.data = CalendarContract.Events.CONTENT_URI
-            intent.putExtra(CalendarContract.Events.TITLE, matchData.description)
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, matchData.description)
-            intent.putExtra(CalendarContract.Events.HAS_ALARM, true)
-            intent.putExtra(CalendarContract.Events.ALL_DAY, false)
-            startActivity(intent)
+            requireActivity().navigateToCalendar(matchData.description)
         }
     }
 
-    /**
-     * When network change ( We can bring it to BaseFragment )
-     */
-    private fun observeNetwork() {
-        NetworkUtils.getNetworkLiveData(requireContext()).observe(this) { isConnected ->
-            if (!isConnected) {
-                binding.tvNetworkStatus.text =
-                    getString(R.string.no_internet)
-                binding.lnNetwork.apply {
-                    show()
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.fail
-                        )
-                    )
-                }
-            } else {
-                if (viewModel.teamsLiveData.value is Resource.Error || adapter.itemCount == 0) {
-                    getTeams()
-                    viewModel.getMatches()
-                }
-                binding.tvNetworkStatus.text =
-                    getString(R.string.internet_connected)
-                binding.lnNetwork.apply {
-                    setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.greenColor
-                        )
-                    )
-                    animationHide()
-                }
-            }
-        }
-    }
+
 }

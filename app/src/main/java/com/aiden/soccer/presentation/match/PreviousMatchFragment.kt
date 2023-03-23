@@ -30,11 +30,7 @@ class PreviousMatchFragment :
         get() = R.layout.fragment_upcoming_match
 
     override fun initView(savedInstanceState: Bundle?) {
-        super.initView(savedInstanceState)
-        binding.run {
-            rvRecyclerview.adapter = adapter
-        }
-
+        binding.rvRecyclerview.adapter = adapter
         mainViewModel.match?.let {
             adapter.submitList(it.matches?.previous)
         }

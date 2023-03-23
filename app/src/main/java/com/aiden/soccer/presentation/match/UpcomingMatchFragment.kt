@@ -14,6 +14,7 @@ import com.aiden.soccer.presentation.match.adapter.PreviousMatchesAdapter
 import com.aiden.soccer.presentation.team.ScoreViewModel
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.viewmodel.MainViewModel
+import com.aiden.soccer.utils.navigateToCalendar
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
 import data.entities.Previous
@@ -44,13 +45,7 @@ class UpcomingMatchFragment :
 
     private fun onMatchItemClicked(matchData: MatchData) {
         if (matchData is Upcoming) {
-            val intent = Intent(Intent.ACTION_INSERT)
-            intent.data = CalendarContract.Events.CONTENT_URI
-            intent.putExtra(CalendarContract.Events.TITLE, matchData.description)
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, matchData.description)
-            intent.putExtra(CalendarContract.Events.HAS_ALARM, true)
-            intent.putExtra(CalendarContract.Events.ALL_DAY, false)
-            startActivity(intent)
+            requireActivity().navigateToCalendar(matchData.description)
         }
     }
 

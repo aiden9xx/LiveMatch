@@ -110,6 +110,7 @@ dependencies {
     testImplementation(Testing.room)
     testImplementation(Testing.okHttp)
     testImplementation(Testing.jUnit)
+    testImplementation(Testing.mockito)
 
     // Android Testing
     androidTestImplementation(Testing.extJUnit)

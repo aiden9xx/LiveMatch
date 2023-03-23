@@ -23,7 +23,6 @@ class MainViewModel @Inject constructor(
     private val removeTeamsUseCase: RemoveTeamsUseCase,
     private val getTeamsUseCase: GetTeamsUseCase,
 ) : BaseViewModel() {
-    var teamId: String? = null
     var match: Match? = null
     var localTeams: List<Team>? = null
 
@@ -32,10 +31,6 @@ class MainViewModel @Inject constructor(
 
     private val _localTeamsLiveData = MutableLiveData<List<Team>>()
     val localTeamsLiveData: LiveData<List<Team>> = _localTeamsLiveData
-
-    init {
-        getTeams()
-    }
 
     private fun getTeams() {
         viewModelScope.launch {

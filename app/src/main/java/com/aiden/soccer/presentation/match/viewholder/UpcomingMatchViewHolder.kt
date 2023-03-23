@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.ItemMatchBinding
+import com.aiden.soccer.extension.getDate
 import com.aiden.soccer.extension.toConfirmTime
 import com.aiden.soccer.utils.TeamLogoManager
 import data.entities.MatchData
@@ -27,6 +28,7 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                 binding.tvTeamA.text = match.home
                 binding.tvTeamB.text = match.away
                 binding.tvDate.text = match.date?.toConfirmTime
+                binding.tvDateTime.text = match.date?.getDate
                 binding.root.setOnClickListener {
                     onItemClicked(match)
                 }

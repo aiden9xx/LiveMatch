@@ -9,5 +9,14 @@
         android:id="@+id/teamFragment"
         android:name="com.aiden.soccer.presentation.team.TeamFragment"
         android:label="TeamsFragment"
-        tools:layout="@layout/fragment_team"/>
+        tools:layout="@layout/fragment_team">
+        <action
+            android:id="@+id/action_teamFragment_to_allMatchesFragment"
+            app:destination="@id/allMatchesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allMatchesFragment"
+        android:name="com.aiden.soccer.presentation.match.all.AllMatchesFragment"
+        android:label="fragment_all_matches"
+        tools:layout="@layout/fragment_all_matches" />
 </navigation>

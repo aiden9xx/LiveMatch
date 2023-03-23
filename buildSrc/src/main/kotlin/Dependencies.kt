@@ -9,8 +9,9 @@ object Testing {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
     const val room = "androidx.room:room-testing:2.2.6"
     const val jUnit = "junit:junit:4.13"
-    const val extJUnit = "androidx.test.ext:junit:1.1.1"
-    const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
+    const val mockito = "org.mockito:mockito-inline:2.21.0"
+    const val extJUnit = "androidx.test.ext:junit:1.1.5"
+    const val espresso = "androidx.test.espresso:espresso-core:3.5.1"
     const val okHttp = "com.squareup.okhttp3:mockwebserver:4.9.0"
     const val core = "androidx.arch.core:core-testing:2.1.0"
 }
