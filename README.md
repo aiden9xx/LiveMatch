@@ -1,78 +1,61 @@
-# home assignment
-## Kotlin + MVVM + Clean Architecture + Coroutines + Hilt...
+# About the App
 
-This project was made with the objective of creating a base structure for new apps, using tools and components supported by Google and by most of the Android development community.
+An Android App for a hypothetical sports event.
 
-## Clean Architecture
+## Features
+- Show all participating teams.
+- Show all previous and upcoming matches.
+- User can select a team and filter matches per team.
+- Watch previous match highlights.
+- Users can set a reminder for an upcoming match.
+- Notify the user when the match is about to start.
 
-Layers
+## Need to improve
+- Watch previous match highlights.
 
-Clean Architecture basically consists of 5 layers.
+## Built With 
+- [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and more..
+- [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - A cold asynchronous data stream that sequentially emits values and completes normally or with an exception.
+- [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
+  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
+  - [ViewDataBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
+  - [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
+ 
+- [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
+- [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+- [Coil](https://coil-kt.github.io/coil) - An image loading library for Android backed by Kotlin Coroutines
+- [Mockito](https://github.com/mockito/mockito) - Most popular mocking framework
 
-### Presentation: Layers that interact with the user. This layer includes Activity, Fragment, ViewModel classes etc.
+## Architecture
+This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) .
 
-### Use Cases: The layer where the user’s work is defined. You can find a detailed explanation of this title in the following sections of the article.
+![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
+![image](https://miro.medium.com/v2/resize:fit:1204/format:webp/1*QRSeKDCITJL2GG6RLVO2iQ.png)
 
-### Domain: The layer where logic operations are performed. For example, entities, value object, exceptions, and logic operations are in this layer.
+### Advantages of Using Clean Architecture
 
-### Data: It is the layer where the source of all abstract data is. All data and models that the application can use are located in this layer.
+ - The code is even more easily testable than with plain MVVM.
 
-### Framework: The layer that interacts with the SDK or framework. So that is, it implements the interaction with the Android SDK and provides custom implementations for the data layer.
+ - The code is further decoupled (the biggest advantage.)
+
+ - The package structure is even easier to navigate.
+
+ - The team can add new features even more quickly.
+
+ - The project is even easier to maintain.
+ 
+### Persist data locally with Room & Flow 
+ - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience. [Reference](https://medium.com/androiddevelopers/room-coroutines-422b786dc4c5)
+ 
+ - In the feature Show all participating teams, I use the Room + Kotlin Flow — a modern Android architecture:
+ <img width="865" alt="image" src="https://user-images.githubusercontent.com/100013592/227413948-d855cc1e-8cfa-452d-af76-1ebfb2bc6bf9.png">
+
+ 
+ - 
+
+ 
+## Screenshots
 
 
-## MVVM
-
-(https://user-images.githubusercontent.com/1812129/68319232-446cf900-00be-11ea-92cf-cad817b2af2c.png)
-
-The Model View ViewModel pattern helps with the separation of concerns, dividing the user interface with the logic behind. The decision to use this pattern is mainly based on the support Google has been giving to it. Not only they have created a ViewModel class to use as a parent to the viewmodels, there is also a huge use of the pattern in official Android presentations and samples. Moreover, MVVM is vastly used in today’s Android development, and combines very well with Android Architecture Components like LiveData and DataBindings.
-
-### Model
-
-As we are implementing MVVM alongside with Clean Architecture, we decided not to have a model class per se. The ViewModel interacts directly with the domain, utilizing the use cases.
-
-### View Model
-
-The orchestrator of the relationship between the data and the user interface of the application. The ViewModel has the logic to convert what the use cases provide into information that the view can understand and present. Furthermore, it has the logic to react to the user’s input, and call the pertinent use cases.
-
-The most useful part of the Android’s ViewModel class is its lifecycle consciousness. It only communicates to the View with LiveData components, so it’s totally agnostic of contexts and activities: it can keep the information alive even against configuration changes like screen rotations or calls to background.
-
-### View
-
-The view in our implementation of MVVM is actually a Fragment or an Activity. The views enclose everything needed to handle the user interface. They observe the ViewModel, using LiveData components, and react to its changes as they need to.
-
-### LiveData Architecture Component
-
-The view uses LiveData to observe changes in the ViewModel. This has  several advantages:
-
-* The UI matches the data state, and this keeps data up to date.
-* Not having to worry about stopped activities and memory leaks. Live data objects are subscript to a lifecycle and automatically stop observing when that lifecycle is ended.
-* Handles configuration changes properly.
-* The same data could be shared between activities.
-
-## Dependency Injection with Hilt
-
-Dependency injection is closely related to two SOLID concepts: dependency inversion, which states that high level modules should not depend on low level modules, both should depend on abstractions; and single responsibility principle, which states that every class or module is responsible for just a single piece of functionality.
-DI supports these goals by decoupling the creation and the usage of an object. It allows you to replace dependencies without changing the class that uses them and also reduces the risk of modifying a class because one of its dependencies changed.
-This sample app uses Hilt as the dependency injection library.
-
-## Coroutines
-
-Coroutines are a new way of managing background threads that can simplify code by reducing the need for callbacks. They convert async callbacks for long-running tasks, such as database or network access, into sequential code.
-We use coroutines to do tasks in a background thread. This goes very well with the idea of use cases, single actions that the ViewModel calls depending of its needs. The guideline should be that every task executed by a use case should be done in a background thread, so, in the main thread, we could show a loading screen or any alternative, and the UI doesn’t get blocked.
-
-__Job__: a job is a cancellable task with a life-cycle that culminates in its completion. By default, a failure of any of the job’s children leads to an immediate failure of its parent and cancellation of the rest of its children. This behavior can be customized using SupervisorJob.
-
-__Dispatchers__:
-* Dispatchers.Default – is used by all standard builders by default. It uses a common pool of shared background threads. This is an appropriate choice for compute-intensive coroutines that consume CPU resources.
-* Dispatchers.IO – uses a shared pool of on-demand created threads and is designed for offloading of IO-intensive blocking operations (like file I/O and blocking socket I/O).
-
-## Other concepts
-
-### AndroidX
-
-AndroidX is a redesigned library, replacing the support library, to make package names more clear. Each androidx package has it own version, detached from the Android API version, so extension libraries can be developed independently.
-
-Androidx also improves understanding of what is added to the app:
-
-* android.* -> bundled in the platform.
-* androidx.* -> extension library.
