@@ -2,21 +2,18 @@ package com.aiden.soccer.presentation.team
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentTeamBinding
+import com.aiden.soccer.extension.convertDateToLong
 import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.MatchActivity
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.team.adapter.TeamAdapter
 import com.aiden.soccer.utils.navigateToCalendar
-import com.aiden.soccer.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
 import data.entities.Team
@@ -48,18 +45,14 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
     override fun onSubscribeObserver() {
         viewModelSelf.teamsLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is Resource.Loading<*> -> {
-                    showLoading(true)
-                }
+                is Resource.Loading<*> -> {}
                 is Resource.Success -> {
                     if (state.data!!.isNotEmpty()) {
                         teamAdapter.submitList(state.data!!.filter { it.logo != null })
-                        showLoading(false)
                     }
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-                    showLoading(false)
                 }
             }
         }
@@ -79,7 +72,7 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
                 adapter = teamAdapter
             }
 
-            rvAllMatches.apply {
+            rvUpcomingMatches.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 adapter = allMatchesAdapter
@@ -98,10 +91,6 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-
-    }
-
     private fun onItemClicked(team: Team) {
         val intent = Intent(context, MatchActivity::class.java)
         intent.putExtra(MatchActivity.KEY_TEAM_ID, team.id)
@@ -110,9 +99,7 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
 
     private fun onMatchItemClicked(matchData: MatchData) {
         if (matchData is Upcoming) {
-            requireActivity().navigateToCalendar(matchData.description)
+            requireActivity().navigateToCalendar(matchData.description, matchData.date?.convertDateToLong)
         }
     }
-
-
 }

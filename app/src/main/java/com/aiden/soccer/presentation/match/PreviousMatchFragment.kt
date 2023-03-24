@@ -2,9 +2,7 @@ package com.aiden.soccer.presentation.match
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentUpcomingMatchBinding
@@ -15,7 +13,6 @@ import com.aiden.soccer.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
 import data.entities.Previous
-import data.entities.Upcoming
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi

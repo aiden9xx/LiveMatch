@@ -5,7 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import data.entities.Team.Companion.TABLE_TEAM
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = TABLE_TEAM)
@@ -17,6 +18,7 @@ data class Team(
     var name: String?,
     var logo: String?,
 ) : Parcelable {
+    @IgnoredOnParcel
     @PrimaryKey(autoGenerate = true)
     var teamId: Int = 0
 

@@ -13,7 +13,6 @@
     <TextView
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:background="@drawable/item_shape_time"
         android:gravity="center"
         tools:text="1 : 0"
         android:textStyle="bold"
@@ -41,6 +40,7 @@
             android:src="@drawable/ic_soccer_place_holder" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/tv_team_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,6 +67,7 @@
             android:src="@drawable/ic_soccer_place_holder" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/tv_team_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

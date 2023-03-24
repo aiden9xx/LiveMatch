@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentAllMatchesBinding
+import com.aiden.soccer.extension.convertDateToLong
 import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.team.ScoreViewModel
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
@@ -21,6 +22,7 @@ class AllMatchesFragment :
     BaseFragment<FragmentAllMatchesBinding, ScoreViewModel>(ScoreViewModel::class) {
 
     private val allMatchesAdapter = AllMatchesAdapter(this::onMatchItemClicked)
+    private val previousMatchesAdapter = AllMatchesAdapter(this::onMatchItemClicked)
 
     override val layoutId: Int
         get() = R.layout.fragment_all_matches
@@ -40,17 +42,23 @@ class AllMatchesFragment :
         super.onSubscribeObserver()
         viewModelSelf.matchesLiveData.observe(viewLifecycleOwner) { match ->
             allMatchesAdapter.submitList(match.matches?.upcoming)
+            previousMatchesAdapter.submitList(match.matches?.previous)
         }
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        binding.rvAllMatches.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvAllMatches.adapter = allMatchesAdapter
+        binding.rvUpcomingMatches.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvUpcomingMatches.adapter = allMatchesAdapter
+
+        binding.rvPreviousMatches.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = previousMatchesAdapter
+        }
     }
 
     private fun onMatchItemClicked(matchData: MatchData) {
         if (matchData is Upcoming) {
-            requireActivity().navigateToCalendar(matchData.description)
+            requireActivity().navigateToCalendar(matchData.description, matchData.date?.convertDateToLong)
         }
     }
 }

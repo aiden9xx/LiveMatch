@@ -32,7 +32,6 @@ android {
 
     buildFeatures.viewBinding = true
 
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,6 +42,12 @@ android {
 
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
+    }
+
+    kotlinOptions {
+        freeCompilerArgs += [
+                "-Xopt-in=kotlin.RequiresOptIn"
+        ]
     }
 }
 

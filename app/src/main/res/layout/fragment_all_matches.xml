@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.match.all.AllMatchesFragment">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/lnHeader"
-        layout="@layout/item_header" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAllMatches"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10"
-        tools:listitem="@layout/item_all_matches"
-        tools:visibility="visible" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.match.all.AllMatchesFragment">
 
-</LinearLayout>
+        <include
+            android:id="@+id/lnHeader"
+            layout="@layout/item_header" />
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upcoming"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUpcomingMatches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            tools:listitem="@layout/item_all_matches"
+            tools:visibility="visible" />
+
+        <TextView
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previous"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPreviousMatches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            tools:listitem="@layout/item_all_matches"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

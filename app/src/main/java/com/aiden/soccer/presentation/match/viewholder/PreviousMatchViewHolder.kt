@@ -4,13 +4,10 @@ import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.aiden.soccer.R
-import com.aiden.soccer.databinding.ItemMatchBinding
 import com.aiden.soccer.databinding.ItemMatchPreviosBinding
-import com.aiden.soccer.extension.toConfirmTime
 import com.aiden.soccer.utils.TeamLogoManager
 import data.entities.MatchData
 import data.entities.Previous
-import data.entities.Upcoming
 
 /**
  * Created by Aiden ( hai Le Thanh )
@@ -31,17 +28,17 @@ class PreviousMatchViewHolder(private val binding: ItemMatchPreviosBinding) :
                 when {
                     match.home == match.winner -> {
                         binding.tvTeamA.setTextColor(Color.parseColor(COLOR_WINNER))
-                        binding.tvTeamB.setTextColor(Color.WHITE)
+                        binding.tvTeamB.setTextColor(Color.BLACK)
                         binding.tvDate.text = FAKE_SCORE_TEAM_A_WIN
                     }
                     match.away == match.winner -> {
-                        binding.tvTeamA.setTextColor(Color.WHITE)
+                        binding.tvTeamA.setTextColor(Color.BLACK)
                         binding.tvTeamB.setTextColor(Color.parseColor(COLOR_WINNER))
                         binding.tvDate.text = FAKE_SCORE_TEAM_B_WIN
                     }
                     else -> {
-                        binding.tvTeamA.setTextColor(Color.WHITE)
-                        binding.tvTeamB.setTextColor(Color.WHITE)
+                        binding.tvTeamA.setTextColor(Color.BLACK)
+                        binding.tvTeamB.setTextColor(Color.BLACK)
                         binding.tvDate.text = FAKE_SCORE_DRAW
                     }
                 }

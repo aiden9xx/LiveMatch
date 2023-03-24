@@ -1,11 +1,12 @@
 package com.aiden.soccer.presentation.match.viewholder
 
+import android.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.ItemMatchBinding
-import com.aiden.soccer.extension.getDate
-import com.aiden.soccer.extension.toConfirmTime
+import com.aiden.soccer.extension.getMatchDateMonth
+import com.aiden.soccer.extension.getMatchTime
 import com.aiden.soccer.utils.TeamLogoManager
 import data.entities.MatchData
 import data.entities.Previous
@@ -20,6 +21,36 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
 
     fun bind(match: MatchData, onItemClicked: (MatchData) -> Unit) {
         when (match) {
+            is Previous -> {
+                binding.tvTeamA.text = match.home
+                binding.tvTeamB.text = match.away
+                loadTeamLogo(
+                    TeamLogoManager.getTeamLogo(match.home),
+                    TeamLogoManager.getTeamLogo(match.away),
+                )
+                when {
+                    match.home == match.winner -> {
+                        binding.tvTeamA.setTextColor(Color.parseColor(PreviousMatchViewHolder.COLOR_WINNER))
+                        binding.tvTeamB.setTextColor(Color.BLACK)
+                        binding.tvDate.text = PreviousMatchViewHolder.FAKE_SCORE_TEAM_A_WIN
+                    }
+                    match.away == match.winner -> {
+                        binding.tvTeamA.setTextColor(Color.BLACK)
+                        binding.tvTeamB.setTextColor(Color.parseColor(PreviousMatchViewHolder.COLOR_WINNER))
+                        binding.tvDate.text = PreviousMatchViewHolder.FAKE_SCORE_TEAM_B_WIN
+                    }
+                    else -> {
+                        binding.tvTeamA.setTextColor(Color.BLACK)
+                        binding.tvTeamB.setTextColor(Color.BLACK)
+                        binding.tvDate.text = PreviousMatchViewHolder.FAKE_SCORE_DRAW
+                    }
+                }
+
+                binding.root.setOnClickListener {
+                    onItemClicked(match)
+                }
+            }
+
             is Upcoming -> {
                 loadTeamLogo(
                     TeamLogoManager.getTeamLogo(match.home),
@@ -27,8 +58,8 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                 )
                 binding.tvTeamA.text = match.home
                 binding.tvTeamB.text = match.away
-                binding.tvDate.text = match.date?.toConfirmTime
-                binding.tvDateTime.text = match.date?.getDate
+                binding.tvDate.text = match.date?.getMatchTime
+                binding.tvDateTime.text = match.date?.getMatchDateMonth
                 binding.root.setOnClickListener {
                     onItemClicked(match)
                 }

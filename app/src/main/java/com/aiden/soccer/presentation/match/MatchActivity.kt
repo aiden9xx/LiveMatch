@@ -22,6 +22,12 @@ class MatchActivity : BaseActivity<ActivityMatchBinding, MainViewModel>(MainView
         }
     }
 
+    override fun initAction() {
+        binding.lnHeader.imvBack.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
     override fun inflateViewBinding(inflater: LayoutInflater): ActivityMatchBinding {
         return ActivityMatchBinding.inflate(inflater)
     }
