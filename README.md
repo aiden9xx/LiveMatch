@@ -26,7 +26,7 @@ An Android App for a hypothetical sports event.
 - [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Coil](https://coil-kt.github.io/coil) - An image loading library for Android backed by Kotlin Coroutines
-- [Mockito] - Most popular mocking framework
+- [Mockito](https://github.com/mockito/mockito) - Most popular mocking framework
 
 ## Architecture
 This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) .
@@ -46,10 +46,13 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
 
  - The project is even easier to maintain.
  
-### ( Persist data locally with Room & Flow )
- - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience.
- - In the feature Show all participating teams, we will load the local data before fetching a new list from the server:
+### Persist data locally with Room & Flow 
+ - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience. [Reference](https://medium.com/androiddevelopers/room-coroutines-422b786dc4c5)
+ 
+ - In the feature Show all participating teams, Room + Kotlin Flow — The modern Android architecture in the class TeamDataSourceImpl:
  <img width="842" alt="image" src="https://user-images.githubusercontent.com/100013592/227411930-a2a6ff54-6265-4685-b232-57d726069f15.png">
+ 
+ - 
 
  
 ## Screenshots
