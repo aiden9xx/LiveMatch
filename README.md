@@ -46,6 +46,12 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
 
  - The project is even easier to maintain.
  
+### ( Persist data locally with Room & Flow )
+ - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience.
+ - In the feature Show all participating teams, we will load the local data before fetching a new list from the server:
+ <img width="842" alt="image" src="https://user-images.githubusercontent.com/100013592/227411930-a2a6ff54-6265-4685-b232-57d726069f15.png">
+
+ 
 ## Screenshots
 
 
