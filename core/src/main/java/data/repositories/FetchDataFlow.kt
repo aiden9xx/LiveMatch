@@ -23,10 +23,10 @@ abstract class FetchDataFlow<RESULT, REQUEST> {
         emit(Resource.Success(fetchTeamsFromLocalDatabase().first()))
 
         val apiResponse = fetchTeamsFromServer()
-        val remoteArticle = apiResponse.body()
+        val remoteTeams = apiResponse.body()
 
-        if (apiResponse.isSuccessful && remoteArticle != null) {
-            storeTeamsToLocalDatabase(remoteArticle)
+        if (apiResponse.isSuccessful && remoteTeams != null) {
+            storeTeamsToLocalDatabase(remoteTeams)
         } else {
             emit(Resource.Error(apiResponse.message()))
         }
@@ -42,19 +42,19 @@ abstract class FetchDataFlow<RESULT, REQUEST> {
     }
 
     /**
-     * Store news to the local database
+     * Store teams to the local database
      */
     @WorkerThread
     protected abstract suspend fun storeTeamsToLocalDatabase(response: REQUEST)
 
     /**
-     * Fetch news from local database
+     * Fetch teams from local database
      */
     @MainThread
     protected abstract fun fetchTeamsFromLocalDatabase(): Flow<RESULT>
 
     /**
-     * Fetch news from the server
+     * Fetch teams from the server
      */
     @MainThread
     protected abstract suspend fun fetchTeamsFromServer(): Response<REQUEST>

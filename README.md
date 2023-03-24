@@ -11,7 +11,7 @@ An Android App for a hypothetical sports event.
 - Notify the user when the match is about to start.
 
 ## Need to improve
-- Watch previous match highlights.
+- Using Jetpack Compose.
 
 ## Built With 
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
@@ -27,6 +27,8 @@ An Android App for a hypothetical sports event.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - [Coil](https://coil-kt.github.io/coil) - An image loading library for Android backed by Kotlin Coroutines
 - [Mockito](https://github.com/mockito/mockito) - Most popular mocking framework
+- [ExoPlayer](https://github.com/google/ExoPlayer) - An application level media player for Android.
+- [Kotlin DSL](https://medium.com/android-dev-hacks/kotlin-dsl-gradle-scripts-in-android-made-easy-b8e2991e2ba): Gradle scripts in Android made easy
 
 ## Architecture
 This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) .
@@ -46,16 +48,30 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
 
  - The project is even easier to maintain.
  
+ ### In the project
+ <img width="319" alt="image" src="https://user-images.githubusercontent.com/100013592/227702904-afecbdfe-f474-438b-836c-ff723c3b4954.png">
+ <img width="276" alt="image" src="https://user-images.githubusercontent.com/100013592/227702532-53827b63-0fb7-4f2a-99a4-4019c17c936e.png">
+ In the app's build gradle
+ <img width="342" alt="image" src="https://user-images.githubusercontent.com/100013592/227703231-867e37c9-8fb6-49fe-b369-494ea6f995d8.png">
+
+ - Layers of MVVM
+    * Domain: The app’s business logic is stored here.
+    * Data: All data sources are defined in a broad sense.
+    * Presentation: This is a layer that interacts with the (UI)user interface.
+ 
 ### Persist data locally with Room & Flow 
  - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience. [Reference](https://medium.com/androiddevelopers/room-coroutines-422b786dc4c5)
  
  - In the feature Show all participating teams, I use the Room + Kotlin Flow — a modern Android architecture:
  <img width="865" alt="image" src="https://user-images.githubusercontent.com/100013592/227413948-d855cc1e-8cfa-452d-af76-1ebfb2bc6bf9.png">
-
  
- - 
-
  
+## Unit Test
+
+### Test API with MockWebServer
+- Test the API Get All Team
+<img width="654" alt="image" src="https://user-images.githubusercontent.com/100013592/227704089-b56333a4-cd19-407c-846d-0e62573d62af.png">
+
 ## Screenshots
 
 <img width="329" alt="image" src="https://user-images.githubusercontent.com/100013592/227469244-b5c14243-1681-4a4d-93d3-ad1f0c003aa5.png">

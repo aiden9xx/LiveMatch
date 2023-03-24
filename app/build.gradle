@@ -69,9 +69,7 @@ dependencies {
     implementation(Android.navigation)
     implementation(Android.navigationFragment)
     implementation(Android.constraintLayout)
-    implementation(Android.swipeRefreshLayout)
-
-
+    implementation(Android.exoplayer)
 
     // Architecture Components
     implementation(Lifecycle.viewModel)
@@ -121,9 +119,4 @@ dependencies {
     implementation(Testing.espresso)
     testImplementation(Testing.extJUnitKtx)
     testImplementation(Testing.testRunner)
-
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.5'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.5'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.5'
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
 }

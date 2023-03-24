@@ -59,9 +59,9 @@ object Android {
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
     const val navigation = "androidx.navigation:navigation-fragment-ktx:2.3.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-    const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:2.5.2"
     const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.6"
+    const val exoplayer = "com.google.android.exoplayer:exoplayer:2.18.5"
 }
 
 object Room {
