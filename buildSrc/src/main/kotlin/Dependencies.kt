@@ -1,10 +1,3 @@
-object SigningConfigs {
-    const val storeFile = "keystore.jks"
-    const val keyAlias = "App Release Key"
-    const val keyPassword = "123456"
-    const val storePassword = "123456"
-}
-
 object Testing {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1"
     const val room = "androidx.room:room-testing:2.2.6"
@@ -25,7 +18,7 @@ object Dependencies {
     const val gradle = "com.android.tools.build:gradle:4.1.1"
     const val daggerHilt = "com.google.dagger:hilt-android-gradle-plugin:2.31-alpha"
     const val ktLint = "org.jlleitschuh.gradle:ktlint-gradle:9.2.1"
-    const val materialDesign = "com.google.android.material:material:1.2.0"
+    const val materialDesign = "com.google.android.material:material:1.6.0"
     const val coil = "io.coil-kt:coil:1.0.0"
     const val gson = "com.google.code.gson:gson:2.8.7"
 }

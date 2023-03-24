@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.aiden.newsdemo"
+        applicationId "com.aiden.sport"
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -121,4 +121,9 @@ dependencies {
     implementation(Testing.espresso)
     testImplementation(Testing.extJUnitKtx)
     testImplementation(Testing.testRunner)
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.5'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.18.5'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.5'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
 }
