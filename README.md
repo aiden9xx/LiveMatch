@@ -58,4 +58,6 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
  
 ## Screenshots
 
+<img width="336" alt="image" src="https://user-images.githubusercontent.com/100013592/227468458-662cb3ba-9c9f-4927-a713-bc95bab96cc5.png"> <img width="333" alt="image" src="https://user-images.githubusercontent.com/100013592/227468759-ca30e4e1-6ec6-48d5-b604-335e7b9309d7.png">
+
 
