@@ -34,6 +34,17 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 ![image](https://user-images.githubusercontent.com/100013592/227408682-5b5279ca-39da-45d4-bd1d-47dde97aa8ef.png)
 
+### Advantages of Using Clean Architecture
+
+ - The code is even more easily testable than with plain MVVM.
+
+ - The code is further decoupled (the biggest advantage.)
+
+ - The package structure is even easier to navigate.
+
+ - The team can add new features even more quickly.
+
+ - The project is even easier to maintain.
  
 ## Screenshots
 
