@@ -27,11 +27,11 @@ class TeamDataSourceImpl @Inject constructor(
     override fun getTeams(): Flow<Resource<List<Team>>> {
         return object : FetchDataFlow<List<Team>, News>() {
 
-            override suspend fun storeNewsToLocalDatabase(response: News) = dao.addTeams(response.teams)
+            override suspend fun storeTeamsToLocalDatabase(response: News) = dao.addTeams(response.teams)
 
-            override fun fetchNewsFromLocalDatabase(): Flow<List<Team>> = dao.getAllTeams()
+            override fun fetchTeamsFromLocalDatabase(): Flow<List<Team>> = dao.getAllTeams()
 
-            override suspend fun fetchNewsFromServer(): Response<News> = service.getTeams()
+            override suspend fun fetchTeamsFromServer(): Response<News> = service.getTeams()
 
         }.asFlow()
     }
@@ -42,11 +42,11 @@ class TeamDataSourceImpl @Inject constructor(
     override fun clearTeams(): Flow<Resource<List<Team>>> {
         return object : FetchDataFlow<List<Team>, News>() {
 
-            override suspend fun storeNewsToLocalDatabase(response: News) = dao.deleteAllTeams()
+            override suspend fun storeTeamsToLocalDatabase(response: News) = dao.deleteAllTeams()
 
-            override fun fetchNewsFromLocalDatabase(): Flow<List<Team>> = dao.getAllTeams()
+            override fun fetchTeamsFromLocalDatabase(): Flow<List<Team>> = dao.getAllTeams()
 
-            override suspend fun fetchNewsFromServer(): Response<News> = service.getTeams()
+            override suspend fun fetchTeamsFromServer(): Response<News> = service.getTeams()
 
         }.asFlow()
     }
