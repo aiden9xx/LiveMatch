@@ -118,6 +118,7 @@ dependencies {
     testImplementation(Testing.mockito)
 
     // Android Testing
-    androidTestImplementation(Testing.extJUnit)
-    androidTestImplementation(Testing.espresso)
+    implementation(Testing.espresso)
+    testImplementation(Testing.extJUnitKtx)
+    testImplementation(Testing.testRunner)
 }
