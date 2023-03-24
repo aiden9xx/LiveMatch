@@ -32,7 +32,7 @@ An Android App for a hypothetical sports event.
 This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) .
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
-![image](https://user-images.githubusercontent.com/100013592/227408682-5b5279ca-39da-45d4-bd1d-47dde97aa8ef.png)
+![image](https://miro.medium.com/v2/resize:fit:1204/format:webp/1*QRSeKDCITJL2GG6RLVO2iQ.png)
 
 ### Advantages of Using Clean Architecture
 
