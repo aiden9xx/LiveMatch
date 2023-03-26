@@ -10,6 +10,7 @@ import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.team.ScoreViewModel
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.viewmodel.MainViewModel
+import com.aiden.soccer.utils.MatchManager
 import com.aiden.soccer.utils.navigateToCalendar
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
@@ -33,8 +34,8 @@ class UpcomingMatchFragment :
             rvRecyclerview.adapter = adapter
         }
 
-        mainViewModel.match?.let {
-            adapter.submitList(it.matches?.upcoming)
+        mainViewModel.match?.let { match ->
+            adapter.submitList(MatchManager.getUpcomingListWithDays(match.matches?.upcoming?.toMutableList()) as List<MatchData>?)
         }
     }
 

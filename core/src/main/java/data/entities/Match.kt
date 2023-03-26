@@ -39,9 +39,8 @@ data class Upcoming(
     val home: String?,
     @SerializedName("description")
     val description: String? = null,
-    var day: String? = "",
 ) : MatchData()
 
 open class MatchData {
-
+    var day: String? = ""
 }

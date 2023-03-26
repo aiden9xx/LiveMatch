@@ -1,10 +1,12 @@
 package com.aiden.soccer.presentation.match.viewholder
 
 import android.graphics.Color
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.ItemMatchPreviosBinding
+import com.aiden.soccer.extension.getMatchDateMonth
 import com.aiden.soccer.utils.TeamLogoManager
 import data.entities.MatchData
 import data.entities.Previous
@@ -21,6 +23,8 @@ class PreviousMatchViewHolder(private val binding: ItemMatchPreviosBinding) :
             is Previous -> {
                 binding.tvTeamA.text = match.home
                 binding.tvTeamB.text = match.away
+                binding.tvDay.text = match.date?.getMatchDateMonth
+                binding.tvDay.visibility = View.VISIBLE
                 loadTeamLogo(
                     TeamLogoManager.getTeamLogo(match.home),
                     TeamLogoManager.getTeamLogo(match.away),

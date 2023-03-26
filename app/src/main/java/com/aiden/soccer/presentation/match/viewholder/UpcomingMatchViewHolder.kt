@@ -25,11 +25,13 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
             is Previous -> {
                 binding.tvTeamA.text = match.home
                 binding.tvTeamB.text = match.away
+                binding.tvAllMatchDay.text = match.date?.getMatchDateMonth
+                binding.tvAllMatchDay.visibility = View.VISIBLE
                 loadTeamLogo(
                     TeamLogoManager.getTeamLogo(match.home),
                     TeamLogoManager.getTeamLogo(match.away),
                 )
-                binding.tvDay.visibility = View.GONE
+                binding.tvDateTime.text = match.date?.getMatchDateMonth
                 when {
                     match.home == match.winner -> {
                         binding.tvTeamA.setTextColor(Color.parseColor(PreviousMatchViewHolder.COLOR_WINNER))
@@ -48,6 +50,13 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                     }
                 }
 
+                if (match.day!!.isNotEmpty()) {
+                    binding.tvDay.visibility = View.VISIBLE
+                    binding.tvDay.text = match.day
+                } else {
+                    binding.tvDay.visibility = View.GONE
+                }
+
                 binding.root.setOnClickListener {
                     onItemClicked(match)
                 }
@@ -62,6 +71,7 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                 binding.tvTeamB.text = match.away
                 binding.tvDate.text = match.date?.getMatchTime
                 binding.tvDateTime.text = match.date?.getMatchDateMonth
+                binding.tvAllMatchDay.visibility = View.GONE
                 binding.root.setOnClickListener {
                     onItemClicked(match)
                 }
