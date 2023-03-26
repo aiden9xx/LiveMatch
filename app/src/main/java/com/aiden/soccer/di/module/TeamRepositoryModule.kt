@@ -18,11 +18,11 @@ import domain.repositories.MatchRepository
 @ExperimentalCoroutinesApi
 @InstallIn(ActivityRetainedComponent::class)
 @Module
-abstract class ArticleRepositoryModule {
+abstract class TeamRepositoryModule {
 
     @ActivityRetainedScoped
     @Binds
-    abstract fun bindArticleRepository(repository: TeamDataSourceImpl): TeamDataRepository
+    abstract fun bindTeamRepository(repository: TeamDataSourceImpl): TeamDataRepository
 
     @ActivityRetainedScoped
     @Binds

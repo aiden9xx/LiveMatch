@@ -1,6 +1,7 @@
 package com.aiden.soccer.presentation.match.viewholder
 
 import android.graphics.Color
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.aiden.soccer.R
@@ -28,6 +29,7 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                     TeamLogoManager.getTeamLogo(match.home),
                     TeamLogoManager.getTeamLogo(match.away),
                 )
+                binding.tvDay.visibility = View.GONE
                 when {
                     match.home == match.winner -> {
                         binding.tvTeamA.setTextColor(Color.parseColor(PreviousMatchViewHolder.COLOR_WINNER))
@@ -62,6 +64,12 @@ class UpcomingMatchViewHolder(private val binding: ItemMatchBinding) :
                 binding.tvDateTime.text = match.date?.getMatchDateMonth
                 binding.root.setOnClickListener {
                     onItemClicked(match)
+                }
+                if (match.day!!.isNotEmpty()) {
+                    binding.tvDay.visibility = View.VISIBLE
+                    binding.tvDay.text = match.day
+                } else {
+                    binding.tvDay.visibility = View.GONE
                 }
             }
         }

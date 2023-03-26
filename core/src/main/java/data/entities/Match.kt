@@ -10,9 +10,9 @@ data class Match(
 
 data class Matches(
     @SerializedName("previous")
-    val previous: List<Previous?>?,
+    val previous: List<Previous>,
     @SerializedName("upcoming")
-    val upcoming: List<Upcoming?>?
+    val upcoming: List<Upcoming>
 )
 
 data class Previous(
@@ -34,11 +34,12 @@ data class Upcoming(
     @SerializedName("away")
     val away: String?,
     @SerializedName("date")
-    val date: String?,
+    var date: String?,
     @SerializedName("home")
     val home: String?,
     @SerializedName("description")
-    val description: String? = null
+    val description: String? = null,
+    var day: String? = "",
 ) : MatchData()
 
 open class MatchData {

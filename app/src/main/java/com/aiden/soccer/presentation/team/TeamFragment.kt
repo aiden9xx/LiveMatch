@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentTeamBinding
 import com.aiden.soccer.extension.convertDateToLong
+import com.aiden.soccer.extension.getMatchDateMonth
 import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.MatchActivity
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
@@ -48,7 +49,9 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
                 is Resource.Loading<*> -> {}
                 is Resource.Success -> {
                     if (state.data!!.isNotEmpty()) {
-                        teamAdapter.submitList(state.data!!.filter { it.logo != null })
+                        state.data?.let { teams ->
+                            teamAdapter.submitList(teams.filter { it.logo != null })
+                        }
                     }
                 }
                 is Resource.Error -> {
@@ -58,10 +61,31 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
         }
 
         viewModelSelf.matchesLiveData.observe(viewLifecycleOwner) { match ->
-            allMatchesAdapter.submitList(match.matches?.upcoming?.take(5))
+            val list = checkDoubleDateTime(match.matches?.upcoming?.toMutableList())
+            allMatchesAdapter.submitList(list as List<MatchData>?)
         }
 
         fetchData()
+    }
+
+    private fun checkDoubleDateTime(list: MutableList<Upcoming>?): MutableList<Upcoming> {
+        if (list.isNullOrEmpty()) return mutableListOf()
+        for (i in 0 until list.size) {
+            list[i].day = list[i].date?.getMatchDateMonth
+        }
+
+        for (i in 0 until list.size) {
+            val day = list[i].day
+            if(!day.isNullOrEmpty()) {
+                for (j in i + 1 until list.size) {
+                    if (day == list[j].day) {
+                        list[j].day = ""
+                    }
+                }
+            }
+        }
+
+        return list
     }
 
     override fun initView(savedInstanceState: Bundle?) {
@@ -86,8 +110,10 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
 
     private fun fetchData() {
         with(viewModelSelf) {
-            getTeams()
-            getMatches()
+            if (teamAdapter.itemCount == 0 || allMatchesAdapter.itemCount == 0) {
+                getTeams()
+                getMatches()
+            }
         }
     }
 
@@ -99,7 +125,10 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
 
     private fun onMatchItemClicked(matchData: MatchData) {
         if (matchData is Upcoming) {
-            requireActivity().navigateToCalendar(matchData.description, matchData.date?.convertDateToLong)
+            requireActivity().navigateToCalendar(
+                matchData.description,
+                matchData.date?.convertDateToLong
+            )
         }
     }
 }

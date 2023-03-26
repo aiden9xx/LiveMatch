@@ -15,9 +15,7 @@ val String.getMatchTime: String?
         val newFormat = SimpleDateFormat(
             "hh:mm aa",
             Locale.getDefault()
-        ).apply {
-            timeZone = TimeZone.getTimeZone("UTC")
-        }
+        )
 
         date?.let {
             return newFormat.format(it).lowercase()
@@ -28,22 +26,24 @@ val String.getMatchTime: String?
 
 val String.getMatchDateMonth: String?
     get() {
-        val iso8601DateFormat = SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-            Locale.getDefault()
-        )
+        try {
+            val iso8601DateFormat = SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                Locale.getDefault()
+            )
 
-        val date = iso8601DateFormat.parse(this)
+            val date = iso8601DateFormat.parse(this)
 
-        val newFormat = SimpleDateFormat(
-            "dd/MM/yyyy",
-            Locale.getDefault()
-        ).apply {
-            timeZone = TimeZone.getTimeZone("UTC")
-        }
+            val newFormat = SimpleDateFormat(
+                "dd/MM/yyyy",
+                Locale.getDefault()
+            )
 
-        date?.let {
-            return newFormat.format(it).lowercase()
+            date?.let {
+                return newFormat.format(it).lowercase()
+            }
+        } catch (ex: Exception) {
+            return null
         }
 
         return null
@@ -55,9 +55,7 @@ val String.convertDateToLong: Long?
         val iso8601DateFormat = SimpleDateFormat(
             "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
             Locale.getDefault()
-        ).apply {
-            timeZone = TimeZone.getTimeZone("UTC")
-        }
+        )
 
         return iso8601DateFormat.parse(this)?.time
     }
