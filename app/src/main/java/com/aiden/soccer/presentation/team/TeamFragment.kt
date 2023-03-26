@@ -14,6 +14,7 @@ import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.MatchActivity
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.team.adapter.TeamAdapter
+import com.aiden.soccer.utils.MatchManager
 import com.aiden.soccer.utils.navigateToCalendar
 import dagger.hilt.android.AndroidEntryPoint
 import data.entities.MatchData
@@ -61,31 +62,10 @@ class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreView
         }
 
         viewModelSelf.matchesLiveData.observe(viewLifecycleOwner) { match ->
-            val list = checkDoubleDateTime(match.matches?.upcoming?.toMutableList())
-            allMatchesAdapter.submitList(list as List<MatchData>?)
+            allMatchesAdapter.submitList(MatchManager.getUpcomingListWithDays(match.matches?.upcoming?.toMutableList()) as List<MatchData>?)
         }
 
         fetchData()
-    }
-
-    private fun checkDoubleDateTime(list: MutableList<Upcoming>?): MutableList<Upcoming> {
-        if (list.isNullOrEmpty()) return mutableListOf()
-        for (i in 0 until list.size) {
-            list[i].day = list[i].date?.getMatchDateMonth
-        }
-
-        for (i in 0 until list.size) {
-            val day = list[i].day
-            if(!day.isNullOrEmpty()) {
-                for (j in i + 1 until list.size) {
-                    if (day == list[j].day) {
-                        list[j].day = ""
-                    }
-                }
-            }
-        }
-
-        return list
     }
 
     override fun initView(savedInstanceState: Bundle?) {

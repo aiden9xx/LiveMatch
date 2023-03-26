@@ -62,7 +62,8 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
  - We want to let the users continue to use our application even if the device they’re using doesn’t have an internet connection. However, even if the user is connected to the network, we can save a lot of bandwidth and keep the network traffic to a minimum. Most of the time the users don’t want to waste time looking at some loading screens, a case in which we can display previous data instantly while fetching new data in the background. So when doing that, we can greatly improve the user experience. [Reference](https://medium.com/androiddevelopers/room-coroutines-422b786dc4c5)
  
  - In the feature Show all participating teams, I use the Room + Kotlin Flow — a modern Android architecture:
- <img width="865" alt="image" src="https://user-images.githubusercontent.com/100013592/227413948-d855cc1e-8cfa-452d-af76-1ebfb2bc6bf9.png">
+ <img width="893" alt="image" src="https://user-images.githubusercontent.com/100013592/227840393-f8646fc9-6adf-4d67-aed0-7e3fa3772601.png">
+
  
  
 ## Unit Test

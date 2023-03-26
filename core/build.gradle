@@ -24,10 +24,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        getByName("debug") {
-            buildConfigField("String", "NEWS_API_KEY", "\"ab4a9b3cb74c40aba0094d53ec81f020\"")
-            buildConfigField("String", "NEWS_COUNTRY_CODE", "\"US\"")
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
