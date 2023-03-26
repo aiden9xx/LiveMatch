@@ -50,7 +50,6 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
  
  ### In the project
  <img width="319" alt="image" src="https://user-images.githubusercontent.com/100013592/227702904-afecbdfe-f474-438b-836c-ff723c3b4954.png">
- <img width="276" alt="image" src="https://user-images.githubusercontent.com/100013592/227702532-53827b63-0fb7-4f2a-99a4-4019c17c936e.png">
  In the app's build gradle
  <img width="342" alt="image" src="https://user-images.githubusercontent.com/100013592/227703231-867e37c9-8fb6-49fe-b369-494ea6f995d8.png">
 
@@ -74,10 +73,11 @@ This app uses [MVVM with Clean Architecture](https://developer.android.com/jetpa
 
 ## Screenshots
 
-<img width="329" alt="image" src="https://user-images.githubusercontent.com/100013592/227469244-b5c14243-1681-4a4d-93d3-ad1f0c003aa5.png">
+<img width="332" alt="image" src="https://user-images.githubusercontent.com/100013592/227764258-dd73c50d-e26a-40db-85c4-b9df2fcb9c15.png">
 <img width="330" alt="image" src="https://user-images.githubusercontent.com/100013592/227469363-609edf7c-a421-426e-8826-94174e3d6094.png">
 <img width="333" alt="image" src="https://user-images.githubusercontent.com/100013592/227469652-652404e5-6f34-46ce-894a-00d022eb6233.png">
-<img width="330" alt="image" src="https://user-images.githubusercontent.com/100013592/227469778-b43e6734-f3bf-4da8-8480-0168627fad97.png">
+<img width="332" alt="image" src="https://user-images.githubusercontent.com/100013592/227764284-dce72e42-4336-436a-a088-e2cac7f10040.png">
+
 
 
 
