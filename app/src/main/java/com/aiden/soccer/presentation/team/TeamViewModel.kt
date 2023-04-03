@@ -1,5 +1,6 @@
 package com.aiden.soccer.presentation.team
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,6 @@ import domain.usecases.GetMatchesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import domain.usecases.GetTeamsUseCase
-import domain.usecases.RemoveTeamsUseCase
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -21,8 +21,7 @@ import javax.inject.Inject
  */
 @ExperimentalCoroutinesApi
 @HiltViewModel
-class ScoreViewModel @Inject constructor(
-    private val removeTeamsUseCase: RemoveTeamsUseCase,
+class TeamViewModel @Inject constructor(
     private val getTeamsUseCase: GetTeamsUseCase,
     private val getMatchesUseCase: GetMatchesUseCase,
 ) :
@@ -35,14 +34,8 @@ class ScoreViewModel @Inject constructor(
 
     fun getTeams() {
         viewModelScope.launch {
-            removeTeamsUseCase.invoke()
-                .onStart {}
-                .map {}
-                .collect {}
-        }
-
-        viewModelScope.launch {
             getTeamsUseCase.invoke().onStart {  }.collect {
+                Log.d("hailt", " TeamViewModel ${it.data?.size}")
                 _teamsLiveData.value = it
             }
         }

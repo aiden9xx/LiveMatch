@@ -2,6 +2,6 @@ package domain.entities
 
 import data.entities.Team
 
-data class News(
+data class Teams(
     var teams: List<Team>
 )

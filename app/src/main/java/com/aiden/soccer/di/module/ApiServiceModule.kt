@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import data.remote.NewsApiService
+import data.remote.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -23,7 +23,7 @@ import javax.inject.Singleton
 class ApiServiceModule {
     @Singleton
     @Provides
-    fun provideRetrofitService(): NewsApiService {
+    fun provideRetrofitService(): ApiService {
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -31,7 +31,7 @@ class ApiServiceModule {
         client.addInterceptor(interceptor)
 
         return Retrofit.Builder()
-            .baseUrl(NewsApiService.API_URL)
+            .baseUrl(ApiService.API_URL)
             .client(client.build())
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(
@@ -40,6 +40,6 @@ class ApiServiceModule {
                 )
             )
             .build()
-            .create(NewsApiService::class.java)
+            .create(ApiService::class.java)
     }
 }

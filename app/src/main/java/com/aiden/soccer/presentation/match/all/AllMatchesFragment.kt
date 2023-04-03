@@ -11,7 +11,7 @@ import com.aiden.soccer.databinding.FragmentAllMatchesBinding
 import com.aiden.soccer.extension.convertDateToLong
 import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.WatchMatchActivity
-import com.aiden.soccer.presentation.team.ScoreViewModel
+import com.aiden.soccer.presentation.team.TeamViewModel
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.utils.MatchManager
 import com.aiden.soccer.utils.navigateToCalendar
@@ -24,7 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @OptIn(ExperimentalCoroutinesApi::class)
 @AndroidEntryPoint
 class AllMatchesFragment :
-    BaseFragment<FragmentAllMatchesBinding, ScoreViewModel>(ScoreViewModel::class) {
+    BaseFragment<FragmentAllMatchesBinding, TeamViewModel>(TeamViewModel::class) {
 
     private val allMatchesAdapter = AllMatchesAdapter(this::onMatchItemClicked)
     private val previousMatchesAdapter = AllMatchesAdapter(this::onPreviousMatchItemClicked)

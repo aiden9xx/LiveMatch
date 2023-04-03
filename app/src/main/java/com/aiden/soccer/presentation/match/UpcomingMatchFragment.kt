@@ -7,7 +7,7 @@ import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentUpcomingMatchBinding
 import com.aiden.soccer.extension.convertDateToLong
 import com.aiden.soccer.presentation.base.BaseFragment
-import com.aiden.soccer.presentation.team.ScoreViewModel
+import com.aiden.soccer.presentation.team.TeamViewModel
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
 import com.aiden.soccer.presentation.viewmodel.MainViewModel
 import com.aiden.soccer.utils.MatchManager
@@ -20,7 +20,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class UpcomingMatchFragment :
-    BaseFragment<FragmentUpcomingMatchBinding, ScoreViewModel>(ScoreViewModel::class) {
+    BaseFragment<FragmentUpcomingMatchBinding, TeamViewModel>(TeamViewModel::class) {
 
     private val adapter = AllMatchesAdapter(this::onMatchItemClicked)
     private val mainViewModel: MainViewModel by activityViewModels()

@@ -3,12 +3,11 @@ package data.repositories
 import android.content.Context
 import com.haroldadmin.cnradapter.NetworkResponse
 import data.entities.Match
-import data.remote.NewsApiService
 import domain.repositories.MatchRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 import dagger.hilt.android.qualifiers.ApplicationContext
-import data.entities.Matches
+import data.remote.ApiService
 import data.remote.Resource
 import extension.timeoutConnection
 import extension.unknownError
@@ -20,7 +19,7 @@ import extension.unknownError
 @ExperimentalCoroutinesApi
 class MatchDataSourceImpl @Inject constructor(
     @ApplicationContext val context: Context,
-    private val service: NewsApiService
+    private val service: ApiService
 ) : MatchRepository {
     override suspend fun getTeamDetail(teamId: String): Resource<Match> {
         return when (val res = service.getTeamMatches(teamId)) {

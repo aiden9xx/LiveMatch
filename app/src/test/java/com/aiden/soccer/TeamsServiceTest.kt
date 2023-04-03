@@ -3,7 +3,7 @@ package com.aiden.soccer
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import data.remote.NewsApiService
+import data.remote.ApiService
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -31,7 +31,7 @@ class TeamsApiServiceTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var apiService: NewsApiService
+    private lateinit var apiService: ApiService
 
     private lateinit var mockWebServer: MockWebServer
 
@@ -46,7 +46,7 @@ class TeamsApiServiceTest {
                 )
             )
             .build()
-            .create(NewsApiService::class.java)
+            .create(ApiService::class.java)
     }
 
     @After

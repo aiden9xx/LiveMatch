@@ -1,5 +1,6 @@
 package data.repositories
 
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import data.remote.Resource
@@ -20,17 +21,20 @@ abstract class FetchDataFlow<RESULT, REQUEST> {
 
     fun asFlow() = flow<Resource<RESULT>> {
 
+        Log.d("hailt", " emit local data")
         emit(Resource.Success(fetchTeamsFromLocalDatabase().first()))
 
         val apiResponse = fetchTeamsFromServer()
         val remoteTeams = apiResponse.body()
 
         if (apiResponse.isSuccessful && remoteTeams != null) {
+            Log.d("hailt", " storeTeamsToLocalDatabase")
             storeTeamsToLocalDatabase(remoteTeams)
         } else {
             emit(Resource.Error(apiResponse.message()))
         }
 
+        Log.d("hailt", " emit final data")
         emitAll(
             fetchTeamsFromLocalDatabase().map {
                 Resource.Success<RESULT>(it)

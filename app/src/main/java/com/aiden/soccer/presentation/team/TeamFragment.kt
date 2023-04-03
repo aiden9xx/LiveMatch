@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aiden.soccer.R
 import com.aiden.soccer.databinding.FragmentTeamBinding
 import com.aiden.soccer.extension.convertDateToLong
-import com.aiden.soccer.extension.getMatchDateMonth
 import com.aiden.soccer.presentation.base.BaseFragment
 import com.aiden.soccer.presentation.match.MatchActivity
 import com.aiden.soccer.presentation.team.adapter.AllMatchesAdapter
@@ -32,7 +31,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
  */
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class TeamFragment : BaseFragment<FragmentTeamBinding, ScoreViewModel>(ScoreViewModel::class) {
+class TeamFragment : BaseFragment<FragmentTeamBinding, TeamViewModel>(TeamViewModel::class) {
 
     private val teamAdapter = TeamAdapter(this::onItemClicked)
     private val allMatchesAdapter = AllMatchesAdapter(this::onMatchItemClicked)

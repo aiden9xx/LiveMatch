@@ -6,5 +6,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface TeamDataRepository {
     fun getTeams(): Flow<Resource<List<Team>>>
-    fun clearTeams(): Flow<Resource<List<Team>>>
 }

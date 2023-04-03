@@ -14,13 +14,12 @@ import kotlinx.parcelize.Parcelize
     SourceConverter::class
 )
 data class Team(
-    var id: String?,
     var name: String?,
     var logo: String?,
 ) : Parcelable {
     @IgnoredOnParcel
-    @PrimaryKey(autoGenerate = true)
-    var teamId: Int = 0
+    @PrimaryKey
+    var id: String = ""
 
     companion object {
         const val TABLE_TEAM = "table_team"
